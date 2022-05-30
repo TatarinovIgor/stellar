@@ -1,0 +1,85 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+map NFT{
+  Payload => Data
+}
+
+map Adv{
+  Issuer => AdvOffer.Issuer
+  Advertiser => AdvRequest.Issuer
+  State => Init/PendingCost/PendingAdv/Done/Closed
+}
+
+
+map Wallet{
+  Address => string
+  Balance => int (in XLM)
+}
+
+map AdvRequest {
+ Adverts *--> Adv
+ Media => Png/Jpeg/Mp4
+ Name => string
+ Link to place => string
+ Description => string
+ Place => string
+ Price => int
+ Issuer => UserAdvertiser
+}
+
+map AdvOffer {
+ Advert *--> Adv
+ Media => Png/Jpeg/Mp4
+ Name => string
+ Link to place => string
+ Description => string
+ Place => string
+ Price => int
+ Issuer => UserInfluencer
+ NFT *-> NFT
+}
+
+map UserAdvertiser {
+ Adverts *---> AdvRequest
+ FirstName => string
+ LastName => string
+ Username => string
+ ProfileImage => Png/Jpeg
+ BannerImage => Png/Jpeg
+ SocialMediaLinks => []string
+ Wallet *-> Wallet
+}
+
+map UserInfluencer {
+ Adverts *---> AdvOffer
+ FirstName => string
+ LastName => string
+ Username => string
+ ProfileImage => Png/Jpeg
+ BannerImage => Png/Jpeg
+ SocialMediaLinks => []string
+ Wallet *-> Wallet
+}
+
+
+map Owner{
+ Adverts *--> AdvOffer
+ FirstName => string
+ LastName => string
+ Username => string
+ ProfileImage => Png/Jpeg
+ BannerImage => Png/Jpeg
+ SocialMediaLinks => []string
+ Wallet *-----> Wallet
+}
+
+map User {
+ GUID => string
+ Type *---> UserInfluencer
+ Type *---> UserAdvertiser
+ Type *---> Owner
+}
+
+
+@enduml
