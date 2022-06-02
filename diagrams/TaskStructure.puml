@@ -1,34 +1,7 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-map Adv{
-  Issuer => AdvOffer.Issuer
-  Advertiser => AdvRequest.Issuer
-  State => Init/PendingCost/PendingAdv/Done/Closed
-}
 
-
-map AdvRequest {
- Adverts *--> Adv
- Media => Png/Jpeg/Mp4
- Name => string
- Link to place => string
- Description => string
- Place => string
- Price => int
- Issuer => UserAdvertiser
-}
-
-map AdvOffer {
- Advert *--> Adv
- Media => Png/Jpeg/Mp4
- Name => string
- Link to place => string
- Description => string
- Place => string
- Price => int
- Issuer => UserInfluencer
-}
 
 map Wallet {
  Registration =>
@@ -38,8 +11,6 @@ map Wallet {
 }
 
 map Marketplace {
- Adverts *---> AdvOffer
- Adverts *---> AdvRequest
  List =>
  Purchase =>
  Agree =>
@@ -49,12 +20,9 @@ map Marketplace {
 
 
 map Registration{
- FirstName => string
- LastName => string
- Username => string
- ProfileImage => Png/Jpeg
- BannerImage => Png/Jpeg
- SocialMediaLinks => []string
+    Register =>
+    Login =>
+    CreateWallet =>
 }
 
 map Project {
